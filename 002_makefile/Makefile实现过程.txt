@@ -1,0 +1,28 @@
+1、编写代码
+...
+
+2、按照规则编写MakeFile
+          target... : prerequisites ...
+          command
+target也就是一个目标文件，可以是Object File，也可以是执行文件。还可以是一个标签（Label），对于标签这种特性，在后续的“伪目标”章节中会有叙述。
+prerequisites就是，要生成那个target所需要的文件或是目标。
+command也就是make需要执行的命令。（任意的Shell命令）
+
+3、细解
+main:hello.o fun.o （main是终极目标程序，它依赖hello.o 和 fun.o两个obj文件，这两个文件链接到一起就会形成main）
+	g++ -o main hello.o fun.o （这里是汇编规则 g++是cpp文件编译器 -o表示链接，结果是链接这两个文件到main）
+
+hello.o:hello.cpp（hello.o是目标程序，源文件是hello.cpp）
+	g++ -c hello.cpp （-c表示只汇编，不链接）
+
+fun.o:fun.cpp fun.h
+	g++ -c fun.cpp
+
+clean:             （make的时候生成目标程序，make clean的时候执行下面代码，清除编译痕迹）
+	rm -rf *.o main
+
+4、结果
+执行make命令 得到 main文件
+运行./main 输出hello
+执行make clean命令，删除.o文件 和 main 这些编译痕迹
+
