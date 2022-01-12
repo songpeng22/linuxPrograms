@@ -1,1 +1,0 @@
-sub.o: sub.cpp
