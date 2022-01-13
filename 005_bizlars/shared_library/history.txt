@@ -1,0 +1,366 @@
+bizlars v1.44 build 0002
+========================
+01.09.2021
+
+Features:
+- new Api to confirm the tilt angle (AdcTiltAngleConfirmed())
+- load capacity 60201 for all countries
+
+Changes:
+- set for countries Nigeria, Gabon, Singapore, New Zealand, Namibia minimum weight in price labeling mode from 1e to 20e
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.42 build 0002
+========================
+19.05.2021
+
+Features:
+- new Api to get the port number of the connected ADC (AdcGetPortNr())
+- load capacity 150504 for all countries
+- set ADC internal resolution for the load capacity 150502, 300504, 1500512, 1501512 and 5003121 to 150000
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.40 build 0001
+========================
+25.01.2021
+
+Changes:
+- Brazil: set tilt compensation to NOT_ALLOWED
+- ssp-Settings: set tilt compensation limit degree from 1° to 0.6° for tilt compensation = off and for valid tilt compensation parameters
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.38 build 0004
+========================
+19.10.2020
+
+Features:
+- Implement capability "ADC_CAP_AUTOMATIC_TILT_SENSOR"
+- new API to enable/disable the automatic tilt sensor
+- scale specific parameter: add attribute "tiltCompensationAlwaysOn"
+
+Changes:
+- Canada: sealed filter settings
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.36 build 0006
+========================
+12.08.2020
+
+Features:
+- Add load capacity 30101 for Switzerland
+- 2nd spirit level limit (is used if the adw has valid tilt compensation values)
+
+Changes:
+- Linux: use libusb to connect to adc
+- ssp-Settings: set tilt compensation limit degree to 2°
+- ssp-Settings: remove settings for tilt compensation corner correction (tcc)
+
+Bugfix:
+- first successful command after reconnect delivers now success instead of error to the application
+- scale model can now be deleted
+- Fct. GetCompatibleLoadCapacities() work now for switzerland (uninitialized variable)
+- Fct. CalcWdtaSettings() API sscanf considered now the current decimal point
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.34 build 0003
+========================
+18.06.2020
+
+Features:
+- new API AdcGetInternalDataEx()
+- lcs-state: add bit outsideZeroTrackingRange
+- add bizerba production settings file (support all load capacities)
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.32 build 0002
+========================
+14.01.2020
+
+Features:
+- Add SSP-File for WS36 ADW505 K3
+- Add SSP-Files for ADW505 K3I
+- limit tilt angle depending on load capacity
+- Add load capacity 601212 for USA
+
+Bugfix:
+- Bugfix in parser for loadcapacity and countrysettings if files not end with \n
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.30 build 0002
+========================
+20.11.2019
+
+Features:
+- Add load capacity 150504 for Switzerland
+- Add country Guinea: Load capacities 1500512, 150502, 300112, 600111, 600212, 60202
+
+Bugfix:
+- API stof (string to float) considered now the current decimal point
+- API AdcGetCalStrings4LoadCapacity() now use the country dependent strings for the calibration strings
+- Brazil: change calibration string e from e= to e=d=
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.28 build 0003
+========================
+17.10.2019
+
+Features:
+- API to get/set scale model from/to adc
+- API to get the calibration strings for a specific load capacity
+- tcc-settings for ADW505 WS18 K3
+
+Changes:
+- move registration parameters from load capacity to country settings
+- china: set minimum load for all scale modes to 20e
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.26 build 0002
+========================
+09.07.2019
+
+Features:
+- Add following load capacities for Greece:
+	- 300114:  Max 6/15/30 kg Min 40 g  e=2/5/10g
+- Add load capacity 150504 for countries Austria, Czech, Slovakia, Bulgaria
+     Romania, Russia, Ukraine, Italy, Hungary, Lithuania
+- Add API for spirit level calibration
+- Add API to reset sensor health data
+
+Changes:
+- lithuania, latvia, estonia, poland: set minmum weight for all modes to 20e
+- loadcapacity 600111: change anzNegBru from 10 to 1
+- cmd RST: increase USB timeout from 0.4 sec to 0.8 sec
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.24 build 0006
+========================
+15.03.2019
+
+Features:
+- Add API for gross weight
+- Add following load capacities for Greece:
+	- 3000121:  Max 300 kg Min 2000 g  e=100g
+	- 3000122:  Max 150/300 kg Min 1000 g  e=50/100g
+	- 6000222:  Max 300/600 kg Min 2000 g  e=100/200g
+- Add following load capacities for China:
+	- 6000222:  Max 300/600 kg Min 2000 g  e=100/200g
+- Add following load capacities for Germany:
+	- 30101:  Max 3 kg Min 20 g  e=1g
+- Add country Myanmar with load capacity 
+	- 150502:  Max 6/15 kg    Min 40 g   e=2/5g
+	- 60202:   Max 3/6 kg     Min 20 g   e=1/2g
+	- 300112:  Max 15/30 kg   Min 100 g  e=5/10g
+	- 600111:  Max 60 kg      Min 200 g  e=10g
+	- 1500512: Max 60/150 kg  Min 400 g  e=20/50g
+	- 6000222: Max 300/600 kg Min 2000 g e=100/200g
+- API AdcOpen(): add parameter to prevent SW-Reset
+
+Changes:
+- update: changes because of renaming adctype from ADC505 to ADW505
+- new country files for USA and Canada: adaptions because of the new structure of allgWaaEinst
+- country settings Italy and Russia percentage tare: set bit TARE_NOT_ROUNDED
+- update: bugfix for adc bootloader version < 1.05 (ignore flash errors for flash block 0xFFF9F00 - 0xFFFF9FF)
+- new error code "ADC_E_CHKSUM_FIRMWARE"
+
+Bugfix:
+- percentage Tare plus known tare for canada: round tare and net to gross scale division
+- percentage Tare plus known tare for usa: calc net with not rounded tare
+- class lars: pointer m_tilt was not initialized
+- Linux: use delete[] to free arrays
+- encoded files: catch exception if files are corrupt
+- set scale specific parameter only if ADC is in application mode
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.22 build 0003
+========================
+14.12.2018
+
+Features:
+- scale specific parameter sealed: spirit level
+- API to set const for an alredy existing tare
+
+Changes:
+- read/write access to eeprom region prod sensors
+- refresh adc capabilities after calibration
+- remove API for spirit level calibration
+
+Bugfix:
+- welmec strings for load capacity 1/1.5 kg
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.20 build 0004
+========================
+05.11.2018
+
+Features:
+- Add API initial zero setting
+- weight dependent tilt angle
+
+Changes:
+- rename load capacity 150503 to 150504
+- RBS command GetHighResolution: rename attribute rawn to digi
+- RBS command Calibration: rename attribute rawl to cdig
+- open: try to open any connected adc (not only the first one)
+- change tare limit cw to tare limit device
+- Generalization of the function tilt compensation correction (tcc) to scale specific parameters
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.18 build 0009
+========================
+26.06.2018
+
+Features:
+- Add following load capacities for canada:
+	- 301112:  Max 0-15/15-30 lb Min 0.10 lb d=e=0.005/0.01 lb
+	- 301111:  Max 30 lb Min 0.20 lb d=e= 0.01 lb
+	- 5003121:  Max 500 oz Min 2 oz d=e= 0.1 oz
+	- 1501512:  Max 60/150 lb Min 0.40 lb d=e= 0.02/0.05 lb
+	- 1501511:  Max 150 lb Min 0.1 lb d=e= 0.05 lb
+	- 601111:  Max 60 lb Min 0.20 lb d=e= 0.01 lb
+	- 601211:  Max 60 lb Min 0.40 lb d=e= 0.02 lb
+	- 601212:  Max 30/60 lb Min 0.20 lb d=e= 0.01/0.02 lb
+- Add load capacity 150503: Max 3/6/15 kg Min 20 g e=1/2/5g for germany
+- Add API to read the production block
+- Tilt compensation limit degree can be limited by country specific settings
+- Extend API AdcGetHighResolution by tare and registration request 
+- new error code ADC_E_INCOMPATIBLE_PROD_DATA
+- Add API to limit weighed/known tare and limit tare in catchweigher mode
+- Add API to get maximum capacity
+- define vendor specific error code area
+- Implement capability "ADC_CAP_HIGHRESOLUTION_WITH_TARE"
+- Add API to set/get the automatic zero setting time (in seconds)
+- new error code ADC_E_LOAD_CAPACITY_NOT_SUPPORTED
+- add load capacity parameter digits resolution (aufloesung)
+- check if adc supports load capacities with configurable digits resolution
+- Add API to read load capacity parameters
+- new error messages for tare handling
+- new error code ADC_E_WS_NOT_SUPPORT_LOAD_CAPACITY
+
+Changes:
+- reduce weight stroke in price labeling mode
+- add the values corr_Limit_b_yTilt and kippLimit to the tcc-settings
+- load capacities Thailand: set anzNegBru to 2% max load
+- country settings: set Bit TARAMODE_SWITCHTARETYPE for USA and Canada
+- move command "zsi" to the zero setting / zero tracking command (GSVd/SSVd)
+- serial connection: workaround for Intel-Driver HSUART (api GetCommTimeouts)
+- analyze always attribute adcState
+
+Bugfix:
+- CAL-Strings for oz load capacities are now correctly created
+- USA load capacity 300112: wrong decimal places in range 2
+- Linux: driver timeout if usb receive packet length is 64. To solve it set usb read size on Linux and Windows from 1024 to 64.
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.16 build 0002
+========================
+03.11.2017
+
+Features:
+- extend command "Get Scale Values (GSV)" by the key "zero setting interval (zsi)"
+- new API to set/get warm up time
+- new API to set zero setting interval
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.14 build 0001
+========================
+08.09.2017
+
+Features:
+- new API for spirit level calibration
+- extend enum AdcTareType: ID ADC_TARE_NO
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.12 build 0001
+========================
+07.07.2017
+
+Features:
+- lcs-state: add bit outsideZeroRange
+
+Changes:
+- support for dis-/enable tilt compensation correction
+
+Requirements:
+- ADC firmware 505 Version >= 1.30
+
+
+bizlars v1.10 build 0003
+========================
+02.06.2017
+
+Features:
+- support for firmware update
+- load capacity max 300 kg / min 2000 g / e 100 g
+- integrate tilt compensation correction
+
+Changes:
+- reduce overload limit from 9d to 8d
+- change key bereich and komma of the load capacities 1200211, 1500512, 3000121, 600111 and 600212
+
+Bugfix:
+- Authentication: transmitted checksum has now always 4 places
+- Telegram production parameter: remove attribute "fac" from telegram
+
+Requirements:
+- ADC firmware 505 Version >= 1.20
+
+bizlars v1.00 build 0003
+========================
+07.04.2017
+
+Features:
+- RBS protocol version 1.00
+
+Changes:
+
+Requirements:
+- ADC firmware 505 Version >= 1.10
+
